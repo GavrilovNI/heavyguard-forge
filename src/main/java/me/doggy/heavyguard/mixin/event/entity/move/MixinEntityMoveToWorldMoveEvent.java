@@ -2,8 +2,7 @@ package me.doggy.heavyguard.mixin.event.entity.move;
 
 import me.doggy.heavyguard.api.event.entity.EntityMoveEvent;
 import me.doggy.heavyguard.api.event.entity.MoveType;
-import me.doggy.heavyguard.math3d.Location3d;
-import me.doggy.heavyguard.mixininterfaces.IPosSetChecksSwitchable;
+import me.doggy.heavyguard.api.math3d.Location3d;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.portal.PortalInfo;

@@ -1,4 +1,4 @@
-package me.doggy.heavyguard.flag.node;
+package me.doggy.heavyguard.api.flag.node;
 
 import me.doggy.heavyguard.api.region.IRegion;
 import net.minecraft.world.item.Item;

@@ -1,7 +1,7 @@
-package me.doggy.heavyguard.flag.node.entity;
+package me.doggy.heavyguard.api.flag.node.entity;
 
 import me.doggy.heavyguard.api.region.IRegion;
-import me.doggy.heavyguard.flag.node.FlagNode;
+import me.doggy.heavyguard.api.flag.node.FlagNode;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 

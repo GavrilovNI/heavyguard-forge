@@ -1,8 +1,8 @@
-package me.doggy.heavyguard.flag;
+package me.doggy.heavyguard.api.flag;
 
 import me.doggy.heavyguard.api.region.IRegion;
 import me.doggy.heavyguard.api.utils.TextBuilder;
-import me.doggy.heavyguard.flag.node.FlagNode;
+import me.doggy.heavyguard.api.flag.node.FlagNode;
 import net.minecraft.ChatFormatting;
 import org.jetbrains.annotations.NotNull;
 

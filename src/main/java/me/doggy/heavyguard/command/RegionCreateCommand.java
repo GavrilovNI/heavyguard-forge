@@ -3,6 +3,7 @@ package me.doggy.heavyguard.command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import me.doggy.heavyguard.HeavyGuard;
 import me.doggy.heavyguard.api.utils.TextBuilder;
 import me.doggy.heavyguard.region.LevelBoundedRegion;
 import me.doggy.heavyguard.region.RegionsProvider;
@@ -47,7 +48,7 @@ public class RegionCreateCommand
                 if(MeasuringTapeItem.isBothPointSet(itemStack))
                 {
                     ServerLevel world = player.getLevel();
-                    IRegionsContainer regions = RegionsProvider.instance().getRegions(world);
+                    IRegionsContainer regions = HeavyGuard.getRegionsProvider().getRegions(world);
                     
                     if(regions.hasRegion(name))
                     {

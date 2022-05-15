@@ -1,9 +1,12 @@
 package me.doggy.heavyguard.flag;
 
 import com.google.gson.*;
+import me.doggy.heavyguard.api.Consts;
 import me.doggy.heavyguard.api.event.region.RegionFlagsEvent;
+import me.doggy.heavyguard.api.flag.FlagPath;
+import me.doggy.heavyguard.api.flag.FlagTypePath;
 import me.doggy.heavyguard.api.region.IRegion;
-import me.doggy.heavyguard.api.region.IRegionFlags;
+import me.doggy.heavyguard.api.flag.IRegionFlags;
 import me.doggy.heavyguard.api.utils.TextBuilder;
 import me.doggy.heavyguard.collection.StringTree;
 import me.doggy.heavyguard.region.RegionPart;
@@ -16,8 +19,6 @@ import java.util.*;
 @SuppressWarnings("unchecked")
 public class RegionFlags extends RegionPart implements IRegionFlags
 {
-    public static final String ALIAS_ANY = "*";
-    
     private final StringTree<Boolean> _tree;
     
     public RegionFlags()
@@ -139,7 +140,7 @@ public class RegionFlags extends RegionPart implements IRegionFlags
     private Boolean getValue(FlagTypePath path, IRegion region, StringTree<Boolean> currentTree)
     {
         var aliases = path.get(0).getAliases(region);
-        aliases.add(ALIAS_ANY);
+        aliases.add(Consts.FLAG_ALIAS_ANY);
         
         for(var alias : aliases)
         {

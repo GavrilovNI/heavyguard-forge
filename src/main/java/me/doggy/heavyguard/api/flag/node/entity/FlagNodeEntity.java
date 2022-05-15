@@ -1,9 +1,9 @@
-package me.doggy.heavyguard.flag.node.entity;
+package me.doggy.heavyguard.api.flag.node.entity;
 
+import me.doggy.heavyguard.api.Consts;
 import me.doggy.heavyguard.api.region.IRegion;
-import me.doggy.heavyguard.flag.FlagPath;
-import me.doggy.heavyguard.flag.RegionFlags;
-import me.doggy.heavyguard.flag.node.FlagNode;
+import me.doggy.heavyguard.api.flag.FlagPath;
+import me.doggy.heavyguard.api.flag.node.FlagNode;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -58,8 +58,8 @@ public class FlagNodeEntity extends FlagNode
         String name = entity.getName().getContents();
         if(name.isEmpty())
             return null;
-        if(name == RegionFlags.ALIAS_ANY)
-            return '_' + RegionFlags.ALIAS_ANY;
+        if(name == Consts.FLAG_ALIAS_ANY)
+            return '_' + Consts.FLAG_ALIAS_ANY;
         return ":name:" + name.replaceAll(" |"+FlagPath.DELIMITER_REGEX, "_");
     }
 }

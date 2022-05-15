@@ -1,7 +1,7 @@
-package me.doggy.heavyguard.flag.node;
+package me.doggy.heavyguard.api.flag.node;
 
 import me.doggy.heavyguard.api.region.IRegion;
-import me.doggy.heavyguard.math3d.Location3i;
+import me.doggy.heavyguard.api.math3d.Location3i;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.level.Level;

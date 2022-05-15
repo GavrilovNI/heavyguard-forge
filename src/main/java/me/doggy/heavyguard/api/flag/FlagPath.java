@@ -1,4 +1,4 @@
-package me.doggy.heavyguard.flag;
+package me.doggy.heavyguard.api.flag;
 
 import org.jetbrains.annotations.NotNull;
 

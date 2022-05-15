@@ -1,7 +1,7 @@
 package me.doggy.heavyguard.api.event.region;
 
 import me.doggy.heavyguard.api.region.IRegion;
-import me.doggy.heavyguard.flag.FlagPath;
+import me.doggy.heavyguard.api.flag.FlagPath;
 
 public abstract class RegionFlagsEvent extends RegionEvent
 {

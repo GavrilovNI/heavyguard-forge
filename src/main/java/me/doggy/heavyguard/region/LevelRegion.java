@@ -2,7 +2,7 @@ package me.doggy.heavyguard.region;
 
 import me.doggy.heavyguard.api.region.IRegion;
 import me.doggy.heavyguard.api.utils.TextBuilder;
-import me.doggy.heavyguard.flag.FlagTypePath;
+import me.doggy.heavyguard.api.flag.FlagTypePath;
 import me.doggy.heavyguard.flag.RegionFlags;
 import me.doggy.heavyguard.util.LevelUtils;
 import net.minecraft.ChatFormatting;

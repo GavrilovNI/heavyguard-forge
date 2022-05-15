@@ -3,7 +3,6 @@ package me.doggy.heavyguard.api.event.region;
 import me.doggy.heavyguard.HeavyGuard;
 import me.doggy.heavyguard.api.region.IRegion;
 import me.doggy.heavyguard.api.region.IRegionsContainer;
-import me.doggy.heavyguard.region.RegionsProvider;
 import net.minecraftforge.eventbus.api.Event;
 
 public abstract class RegionEvent extends Event
@@ -11,7 +10,7 @@ public abstract class RegionEvent extends Event
     public static void postEventBy(IRegionsContainer regions, Event event)
     {
         regions.getEventBus().post(event);
-        if(RegionsProvider.instance().getRegions(regions.getLevel()) == regions)
+        if(HeavyGuard.getRegionsProvider().getRegions(regions.getLevel()) == regions)
             HeavyGuard.getEventBus().post(event);
     }
     public static void postEventBy(IRegion region, Event event)
@@ -19,7 +18,7 @@ public abstract class RegionEvent extends Event
         region.getEventBus().post(event);
         
         var level = region.getLevel();
-        var regions = RegionsProvider.instance().getRegions(level);
+        var regions = HeavyGuard.getRegionsProvider().getRegions(level);
         if(regions.hasRegion(region))
         {
             regions.getEventBus().post(event);

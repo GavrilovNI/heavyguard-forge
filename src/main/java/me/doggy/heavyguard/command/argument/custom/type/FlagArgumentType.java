@@ -8,7 +8,7 @@ import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import me.doggy.heavyguard.HeavyGuard;
 import me.doggy.heavyguard.command.argument.ModCommandExceptions;
-import me.doggy.heavyguard.flag.FlagPath;
+import me.doggy.heavyguard.api.flag.FlagPath;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.synchronization.ArgumentTypes;
 import net.minecraft.commands.synchronization.EmptyArgumentSerializer;
@@ -16,7 +16,6 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 public class FlagArgumentType implements ArgumentType<String>

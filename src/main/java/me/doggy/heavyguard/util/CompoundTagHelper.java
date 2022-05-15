@@ -1,7 +1,7 @@
 package me.doggy.heavyguard.util;
 
+import me.doggy.heavyguard.api.Membership;
 import me.doggy.heavyguard.api.math3d.BoundsInt;
-import me.doggy.heavyguard.util.delegates.Consumer2;
 import me.doggy.heavyguard.util.delegates.Consumer3;
 import me.doggy.heavyguard.util.delegates.Function2;
 import net.minecraft.client.Minecraft;
@@ -19,6 +19,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+import java.util.function.BiConsumer;
 
 public class CompoundTagHelper
 {
@@ -89,14 +91,18 @@ public class CompoundTagHelper
     
     public static <K, V> void putMap(CompoundTag nbt, String key, Map<K, V> map, Consumer3<CompoundTag, String, K> putKeyAction, Consumer3<CompoundTag, String, V> putValueAction)
     {
-        nbt.putInt(key, map.size());
+        putMap(nbt, key, map.entrySet(), putKeyAction, putValueAction);
+    }
+    public static <K, V> void putMap(CompoundTag nbt, String key, Iterable<Map.Entry<K, V>> map, Consumer3<CompoundTag, String, K> putKeyAction, Consumer3<CompoundTag, String, V> putValueAction)
+    {
         int i = 0;
-        for(var mapEntry : map.entrySet())
+        for(var mapEntry : map)
         {
             putKeyAction.apply(nbt, key + i, mapEntry.getKey());
             putValueAction.apply(nbt, key + i + "V", mapEntry.getValue());
             i++;
         }
+        nbt.putInt(key, i);
     }
     
     public static <V> void putMap(CompoundTag nbt, String key, Map<?, V> map, Consumer3<CompoundTag, String, V> putValueAction)
@@ -117,14 +123,14 @@ public class CompoundTagHelper
         return result;
     }
     
-    public static void removeMap(CompoundTag nbt, String key, Consumer2<CompoundTag, String> removeKeyAction, Consumer2<CompoundTag, String> removeValueAction)
+    public static void removeMap(CompoundTag nbt, String key, BiConsumer<CompoundTag, String> removeKeyAction, BiConsumer<CompoundTag, String> removeValueAction)
     {
         int count = nbt.getInt(key);
         nbt.remove(key);
         for(int i = 0; i < count; i++)
         {
-            removeKeyAction.apply(nbt, key + i);
-            removeValueAction.apply(nbt, key + i + "V");
+            removeKeyAction.accept(nbt, key + i);
+            removeValueAction.accept(nbt, key + i + "V");
         }
     }
     

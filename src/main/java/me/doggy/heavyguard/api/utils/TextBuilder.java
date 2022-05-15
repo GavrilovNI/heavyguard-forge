@@ -1,12 +1,12 @@
 package me.doggy.heavyguard.api.utils;
 
 import com.mojang.brigadier.Message;
-import me.doggy.heavyguard.util.delegates.Consumer2;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 public class TextBuilder implements Message, ISendable
 {
@@ -167,10 +167,10 @@ public class TextBuilder implements Message, ISendable
         return this;
     }
     
-    public <T>void send(T object, Consumer2<T, Component> sendFunc)
+    public <T>void send(T object, BiConsumer<T, Component> sendFunc)
     {
         for(var line : _lines)
-            sendFunc.apply(object, line);
+            sendFunc.accept(object, line);
     }
     
     @Override

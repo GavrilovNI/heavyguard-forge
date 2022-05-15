@@ -73,7 +73,7 @@ public class RegionsArgumentType implements ArgumentType<Map<String, Object>>
         Vec3 position = ParametersArgumentType.getParameter(context, parameters, "-p", Vec3Argument::getVec3);
     
         CommandSourceStack source = context.getSource();
-        IRegionsContainer regionsContainer = RegionsProvider.instance().getRegions(level == null ? source.getLevel() : level);
+        IRegionsContainer regionsContainer = HeavyGuard.getRegionsProvider().getRegions(level == null ? source.getLevel() : level);
         if(regionName == null)
         {
             if(position == null)

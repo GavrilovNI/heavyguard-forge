@@ -4,6 +4,7 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import me.doggy.heavyguard.HeavyGuard;
 import me.doggy.heavyguard.api.utils.TextBuilder;
 import me.doggy.heavyguard.region.RegionsProvider;
 import me.doggy.heavyguard.api.region.IRegionsContainer;
@@ -28,7 +29,7 @@ public class RegionRemoveCommand
     {
         var region = RegionsArgumentType.getOneRegion(context, "region");
         var level = region.getLevel();
-        IRegionsContainer regions = RegionsProvider.instance().getRegions(level);
+        IRegionsContainer regions = HeavyGuard.getRegionsProvider().getRegions(level);
         regions.removeRegion(region);
     
         TextBuilder.of("Region '" + region.getName() + "' removed from level " + LevelUtils.getName(level) + ".", ChatFormatting.GREEN).send(context.getSource());

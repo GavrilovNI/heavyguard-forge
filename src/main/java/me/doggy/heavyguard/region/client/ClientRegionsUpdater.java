@@ -225,7 +225,7 @@ public class ClientRegionsUpdater
         BoundsInt bounds = getPlayerVisibilityBounds(playerPosition, radius);
         
         ServerLevel level = player.getLevel();
-        IRegionsContainer regionsContainer = RegionsProvider.instance().getRegions(level);
+        IRegionsContainer regionsContainer = HeavyGuard.getRegionsProvider().getRegions(level);
         
         var regions = regionsContainer.getBoundedRegions(bounds);
         

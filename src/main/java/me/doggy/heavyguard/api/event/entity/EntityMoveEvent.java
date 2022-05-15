@@ -1,6 +1,6 @@
 package me.doggy.heavyguard.api.event.entity;
 
-import me.doggy.heavyguard.math3d.Location3d;
+import me.doggy.heavyguard.api.math3d.Location3d;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.eventbus.api.Cancelable;

@@ -17,37 +17,17 @@ public class RegionsProvider implements IRegionsProvider
 {
     private final Map<ServerLevel, ServerLevelRegionsContainer> _regionsContainers = new HashMap<>();
     
-    private final static RegionsProvider _instance;
-    
-    static
-    {
-        _instance = new RegionsProvider();
-    }
-    
-    public static RegionsProvider instance()
-    {
-        return _instance;
-    }
-    
-    private RegionsProvider()
-    {
-        MinecraftForge.EVENT_BUS.addListener(
-                (ServerAboutToStartEvent event) -> _regionsContainers.clear()
-        );
-        MinecraftForge.EVENT_BUS.addListener(
-                (ServerStoppedEvent event) -> _regionsContainers.clear()
-        );
-
-        MinecraftForge.EVENT_BUS.addListener((WorldEvent.Load event) -> loadWorldRegions(event.getWorld()));
-        MinecraftForge.EVENT_BUS.addListener((WorldEvent.Save event) -> saveWorldRegions(event.getWorld()));
-    }
-    
     public IRegionsContainer getRegions(ServerLevel level)
     {
         return _regionsContainers.get(level);
     }
     
-    private void loadWorldRegions(LevelAccessor levelAccessor)
+    public void clear()
+    {
+        _regionsContainers.clear();
+    }
+    
+    public void loadWorldRegions(LevelAccessor levelAccessor)
     {
         if(levelAccessor instanceof ServerLevel level)
         {
@@ -61,7 +41,7 @@ public class RegionsProvider implements IRegionsProvider
         }
     }
     
-    private void saveWorldRegions(LevelAccessor levelAccessor)
+    public void saveWorldRegions(LevelAccessor levelAccessor)
     {
         if(levelAccessor instanceof ServerLevel serverLevel)
         {

@@ -1,20 +1,21 @@
-package me.doggy.heavyguard.math3d;
+package me.doggy.heavyguard.api.math3d;
+
 import net.minecraft.core.Position;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-public class Location3d implements Position
+public class Location3d<L extends Level> implements Position
 {
-    private final Level _level;
+    private final L _level;
     private final Vec3 _position;
     
-    public Location3d(Level world, Vec3 position)
+    public Location3d(L level, Vec3 position)
     {
-        _level = world;
+        _level = level;
         _position = position;
     }
     
-    public Level getLevel()
+    public L getLevel()
     {
         return _level;
     }
@@ -40,5 +41,11 @@ public class Location3d implements Position
     public double z()
     {
         return _position.z;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return getLevel().toString() + " : " + getPosition().toString();
     }
 }

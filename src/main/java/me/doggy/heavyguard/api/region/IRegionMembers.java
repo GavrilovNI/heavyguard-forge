@@ -14,5 +14,7 @@ public interface IRegionMembers extends Iterable<Map.Entry<UUID, Membership>>, I
     
     Membership getPlayerMembership(UUID playerUuid);
     
+    int getSize();
+    
     @NotNull Iterator<Map.Entry<UUID, Membership>> iterator();
 }

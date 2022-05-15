@@ -1,8 +1,6 @@
-package me.doggy.heavyguard.api.region;
+package me.doggy.heavyguard.api.flag;
 
 import me.doggy.heavyguard.api.utils.ITextable;
-import me.doggy.heavyguard.flag.FlagPath;
-import me.doggy.heavyguard.flag.FlagTypePath;
 
 import javax.annotation.Nullable;
 

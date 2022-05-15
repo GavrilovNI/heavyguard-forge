@@ -30,6 +30,12 @@ public class RegionMembers extends RegionPart implements IRegionMembers
     }
     
     @Override
+    public int getSize()
+    {
+        return _members.size();
+    }
+    
+    @Override
     public void setPlayerMembership(UUID playerUuid, Membership membership)
     {
         Membership oldMembership;
@@ -80,9 +86,9 @@ public class RegionMembers extends RegionPart implements IRegionMembers
         return builder;
     }
     
-    public void toNbt(CompoundTag nbt, String key)
+    public static void toNbt(IRegionMembers regionMembers, CompoundTag nbt, String key)
     {
-        CompoundTagHelper.putMap(nbt, key, _members, (n, k, u) -> n.putUUID(k, u), CompoundTagHelper::putEnum);
+        CompoundTagHelper.putMap(nbt, key, regionMembers, (n, k, u) -> n.putUUID(k, u), CompoundTagHelper::putEnum);
     }
     
     public static RegionMembers fromNbt(CompoundTag nbt, String key)

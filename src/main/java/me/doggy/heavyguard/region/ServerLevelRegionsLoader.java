@@ -157,7 +157,7 @@ public class ServerLevelRegionsLoader
         
         mainNbt.putString("name", region.getName());
         CompoundTagHelper.putLevel(mainNbt, "world", region.getLevel());
-        region.getMembers().toNbt(mainNbt, "members");
+        RegionMembers.toNbt(region.getMembers(), mainNbt, "members");
         
         if(region instanceof LevelBoundedRegion)
             CompoundTagHelper.putBoundsInt(mainNbt, "bounds", ((LevelBoundedRegion)region)._bounds);

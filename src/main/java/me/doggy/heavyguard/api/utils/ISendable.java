@@ -1,7 +1,5 @@
 package me.doggy.heavyguard.api.utils;
 
-import me.doggy.heavyguard.util.ReflectionHelper;
-import me.doggy.heavyguard.util.delegates.Consumer2;
 import net.minecraft.Util;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
@@ -12,10 +10,11 @@ import net.minecraft.world.entity.player.Player;
 
 import java.lang.reflect.Field;
 import java.util.UUID;
+import java.util.function.BiConsumer;
 
 public interface ISendable
 {
-    <T>void send(T object, Consumer2<T, Component> sendFunc);
+    <T>void send(T object, BiConsumer<T, Component> sendFunc);
     
     default void sendSuccess(CommandSourceStack commandSource, boolean pAllowLogging)
     {
@@ -36,8 +35,7 @@ public interface ISendable
     {
         try
         {
-            Field field = ReflectionHelper.getSuperClassUntil(commandSource.getClass(),
-                    CommandSourceStack.class).getDeclaredField("source");
+            Field field = CommandSourceStack.class.getDeclaredField("source");
             field.setAccessible(true);
             CommandSource commandSourceInner = (CommandSource)field.get(commandSource);
             send(commandSourceInner, (source, text) -> source.sendMessage(text, senderUuid));

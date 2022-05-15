@@ -175,7 +175,7 @@ public class RegionNameArgumentType implements ArgumentType<String>
             Set<String> result = new HashSet<>();
             for(var level : server.getAllLevels())
             {
-                IRegionsContainer regionsContainer = RegionsProvider.instance().getRegions(level);
+                IRegionsContainer regionsContainer = HeavyGuard.getRegionsProvider().getRegions(level);
                 var regionsToAdd = regionsContainer.getRegions(
                         r -> r.getMembers().getPlayerMembership(player.getUUID()) != Membership.Stranger).map(
                         r -> r.getName()).collect(Collectors.toSet());
