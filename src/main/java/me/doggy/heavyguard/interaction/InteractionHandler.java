@@ -76,12 +76,63 @@ public class InteractionHandler implements IInteractionHandler
         }
     }
     
+    private<T extends Player> void sendDebug(Interaction interaction)
+    {
+        sendDebug(interaction, "");
+    }
+    
+    private<T extends Player> void sendDebug(Interaction interaction, String additionalMessage)
+    {
+        sendDebug(interaction, true, additionalMessage);
+    }
+    
+    private<T extends Player> void sendDebug(Interaction interaction, boolean onlyIfRegionsFound)
+    {
+        sendDebug(interaction, onlyIfRegionsFound, "");
+    }
+    
+    private<T extends Player> void sendDebug(Interaction interaction, boolean onlyIfRegionsFound, String additionalMessage)
+    {
+        if(interaction instanceof IInteractedByEntity interactedByEntity)
+        {
+            if(interactedByEntity.getInteractor() instanceof Player player)
+            {
+                var location = interaction.getLocation();
+                var regions = _regionsProvider.getRegions(location.getLevel()).getRegions(location.getPosition());
+                var path = interaction.getFlagPath();
+                for(var region : regions)
+                {
+                    var builder = TextBuilder.of("Interaction for " + region.getName())
+                            .startNewLine(2).add(path.getInfo(region));
+                    
+                    if(additionalMessage.isEmpty() == false)
+                        builder.startNewLine(0).add(additionalMessage);
+                    
+                    builder.startNewLine().add("cancelled: " + interaction.isCanceled())
+                            .send(player);
+                }
+                if(regions.isEmpty() && onlyIfRegionsFound == false)
+                {
+                    var builder = TextBuilder.of("Interaction (no regions found)")
+                            .startNewLine(2).add(path.toString());
+    
+                    if(additionalMessage.isEmpty() == false)
+                        builder.startNewLine(0).add(additionalMessage);
+    
+                    builder.startNewLine().add("cancelled: " + interaction.isCanceled())
+                            .send(player);
+                }
+            }
+        }
+    }
+    
     public boolean test(Interaction interaction)
     {
         Objects.requireNonNull(interaction);
         boolean cancelled = _eventBus.post(interaction);
         if(cancelled)
             sendNoAccessMessage(interaction);
+        sendDebug(interaction);
         return cancelled;
     }
 }

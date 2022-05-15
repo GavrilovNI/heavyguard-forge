@@ -47,9 +47,9 @@ public class FlagNodeWorldBlock extends FlagNode
     
         result.add(ForgeRegistries.BLOCKS.getKey(block).toString());
         
-        if(block instanceof EntityBlock)
+        if(block instanceof EntityBlock entityBlock)
         {
-            result.addAll(FlagNode.getClassPath(((EntityBlock)block).getClass(), EntityBlock.class));
+            result.addAll(FlagNode.getClassPathBefore(entityBlock.getClass(), EntityBlock.class));
             
             var blockEntity = level.getBlockEntity(blockPos);
             if(blockEntity instanceof Clearable)
@@ -64,7 +64,7 @@ public class FlagNodeWorldBlock extends FlagNode
         }
         else
         {
-            result.addAll(FlagNode.getClassPath(block.getClass(), Block.class));
+            result.addAll(FlagNode.getClassPathBefore(block.getClass(), Block.class));
         }
         
         result.addAll(_additionalAliases);

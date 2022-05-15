@@ -17,11 +17,16 @@ public abstract class FlagNode
         var splitted = Arrays.stream(className.split("(?=\\p{Lu})")).map(x -> x.toLowerCase()).toList();
         return String.join("_", splitted);
     }
-    public static<T> ArrayList<String> getClassPath(Class<T> clazz, Class<? super T> until)
+    public static<T> ArrayList<String> getClassPathBefore(Class<T> clazz, Class<? super T> before)
+    {
+        ArrayList<String> result = getClassPathUntil(clazz, before);
+        return new ArrayList<>(result.subList(0, result.size() - 1));
+    }
+    public static<T> ArrayList<String> getClassPathUntil(Class<T> clazz, Class<? super T> until)
     {
         ArrayList<String> result = new ArrayList<>();
         Class<? super T> current = clazz;
-        while(current.equals(until) == false)
+        while(until.isAssignableFrom(current))
         {
             result.add(classToFlagNodeName(current));
             current = current.getSuperclass();

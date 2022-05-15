@@ -31,7 +31,7 @@ public class FlagNodeFluid extends FlagNode
         ArrayList<String> result = new ArrayList<>();
         
         result.add(ForgeRegistries.FLUIDS.getKey(_fluid).toString());
-        result.addAll(FlagNode.getClassPath(_fluid.getClass(), Fluid.class));
+        result.addAll(FlagNode.getClassPathBefore(_fluid.getClass(), Fluid.class));
         result.add("fluid");
         
         return result;

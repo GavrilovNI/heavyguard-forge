@@ -46,7 +46,7 @@ public class FlagNodeLivingEntity extends FlagNode
         String name = FlagNodeEntity.getEntityName(_livingEntity);
         if(name != null)
             result.add(name);
-        result.addAll(FlagNode.getClassPath(_livingEntity.getClass(), LivingEntity.class));
+        result.addAll(FlagNode.getClassPathBefore(_livingEntity.getClass(), LivingEntity.class));
         result.addAll(getPrefix());
         return result;
     }

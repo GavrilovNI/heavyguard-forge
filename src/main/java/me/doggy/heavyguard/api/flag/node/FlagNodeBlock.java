@@ -36,12 +36,12 @@ public class FlagNodeBlock extends FlagNode
         result.add(ForgeRegistries.BLOCKS.getKey(_block).toString());
         if(_block instanceof EntityBlock)
         {
-            result.addAll(FlagNode.getClassPath(((EntityBlock)_block).getClass(), EntityBlock.class));
+            result.addAll(FlagNode.getClassPathBefore(((EntityBlock)_block).getClass(), EntityBlock.class));
             result.add(FlagNode.classToFlagNodeName(EntityBlock.class));
         }
         else
         {
-            result.addAll(FlagNode.getClassPath(_block.getClass(), Block.class));
+            result.addAll(FlagNode.getClassPathBefore(_block.getClass(), Block.class));
         }
         result.add(MAIN_ALIAS);
         

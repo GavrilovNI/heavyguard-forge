@@ -27,7 +27,7 @@ public class FlagNodeItem extends FlagNode
     {
         ArrayList<String> result = new ArrayList<>();
         result.add(ForgeRegistries.ITEMS.getKey(_item).toString());
-        result.addAll(FlagNode.getClassPath(_item.getClass(), Item.class));
+        result.addAll(FlagNode.getClassPathBefore(_item.getClass(), Item.class));
         result.add("item");
         return result;
     }
