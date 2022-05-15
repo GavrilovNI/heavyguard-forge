@@ -4,11 +4,28 @@ build/
 out/
 classes/
 
-#idea
-.idea/
-*.iml
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
 *.ipr
 *.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
 
 # forge
 run/

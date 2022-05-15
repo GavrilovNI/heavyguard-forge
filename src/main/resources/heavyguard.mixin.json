@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.doggy.heavyguard.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "event.entity.move.MixinEntityMoveToWorldMoveEvent",
+    "event.entity.move.MixinEntitySetPosEntityMoveEvent",
+    "event.entity.move.MixinEntityStartRidingEntityMoveEvent",
+    "event.entity.move.MixinServerGamePacketListenerImplEntityMoveEvent",
+    "event.entity.move.MixinServerPlayerEntityMoveToWorldEntityMoveEvent",
+    "event.entity.move.MixinServerPlayerEntityTeleportEntityMoveEvent",
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "heavyguard.mixin-refmap.json"
+}
