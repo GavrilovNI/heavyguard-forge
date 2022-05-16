@@ -116,7 +116,7 @@ public class RegionFlags extends RegionPart implements IRegionFlags
         if(value == null)
             removeValue(path);
         else
-            setValue(path, value);
+            setValue(path, value.booleanValue());
     }
     
     @Nullable

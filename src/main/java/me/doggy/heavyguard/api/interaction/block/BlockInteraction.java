@@ -5,12 +5,14 @@ import me.doggy.heavyguard.api.flag.node.FlagNodeLiteral;
 import me.doggy.heavyguard.api.flag.node.FlagNodeWorldBlock;
 import me.doggy.heavyguard.api.flag.node.entity.FlagNodeEntity;
 import me.doggy.heavyguard.api.interaction.IInteractedByEntity;
-import me.doggy.heavyguard.api.interaction.Interaction;
+import me.doggy.heavyguard.api.interaction.LocatedFlagInteraction;
 import me.doggy.heavyguard.api.math3d.Location3i;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 
-public abstract class BlockInteraction extends Interaction
+import java.util.Objects;
+
+public abstract class BlockInteraction extends LocatedFlagInteraction
 {
     private final Location3i<ServerLevel> _blockLocation;
     
@@ -32,6 +34,7 @@ public abstract class BlockInteraction extends Interaction
         public EntityInteractWithBlock(Location3i<ServerLevel> blockLocation, Entity interactor)
         {
             super(blockLocation);
+            Objects.requireNonNull(blockLocation);
             _interactor = interactor;
         }
         
@@ -49,11 +52,12 @@ public abstract class BlockInteraction extends Interaction
         public SimpleEntityInteractWithBlock(Location3i<ServerLevel> blockLocation, Entity interactor, String interactionKey)
         {
             super(blockLocation, interactor);
+            Objects.requireNonNull(interactionKey);
             _key = interactionKey;
         }
     
         @Override
-        public FlagTypePath getFlagPath()
+        public FlagTypePath getFlag()
         {
             return FlagTypePath.of(
                     FlagNodeEntity.create(getInteractor()),

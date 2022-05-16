@@ -158,6 +158,7 @@ public class ServerLevelRegionsLoader
         mainNbt.putString("name", region.getName());
         CompoundTagHelper.putLevel(mainNbt, "world", region.getLevel());
         RegionMembers.toNbt(region.getMembers(), mainNbt, "members");
+        mainNbt.putInt("priority", region.getPriority());
         
         if(region instanceof LevelBoundedRegion)
             CompoundTagHelper.putBoundsInt(mainNbt, "bounds", ((LevelBoundedRegion)region)._bounds);
@@ -222,9 +223,10 @@ public class ServerLevelRegionsLoader
         RegionFlags flags = loadRegionFlags(regionDirectory, new RegionFlags());
         RegionMembers members = mainNbt.contains("members") ? RegionMembers.fromNbt(mainNbt,
                 "members") : new RegionMembers();
+        int priority = mainNbt.contains("priority") ? mainNbt.getInt("priority") : 0;
         
         LevelRegion region = bounds == null ? new LevelRegion(name, world, flags,
-                members) : new LevelBoundedRegion(name, world, flags, members, bounds);
+                members, priority) : new LevelBoundedRegion(name, world, flags, members, bounds, priority);
         
         region.markClean();
         return region;

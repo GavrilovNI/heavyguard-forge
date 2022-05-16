@@ -20,9 +20,9 @@ public class LevelBoundedRegion extends LevelRegion implements IBoundedRegion
         _bounds = bounds;
     }
     
-    public LevelBoundedRegion(String name, ServerLevel world, RegionFlags flags, RegionMembers members, BoundsInt bounds)
+    public LevelBoundedRegion(String name, ServerLevel world, RegionFlags flags, RegionMembers members, BoundsInt bounds, int priority)
     {
-        super(name, world, flags, members);
+        super(name, world, flags, members, priority);
         _bounds = bounds;
     }
     

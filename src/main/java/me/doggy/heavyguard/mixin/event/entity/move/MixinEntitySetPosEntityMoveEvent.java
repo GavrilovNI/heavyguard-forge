@@ -61,7 +61,7 @@ public class MixinEntitySetPosEntityMoveEvent implements IPosSetChecksSwitchable
         
         var entity = (Entity)(Object) this;
         
-        var event = new EntityMoveEvent.CanMove(entity, oldLocation, newLocation, MoveType.Self);
+        var event = new EntityMoveEvent.CanMove(entity, oldLocation, newLocation, MoveType.Simple);
         MinecraftForge.EVENT_BUS.post(event);
         var cancelled = event.isCanceled();
         
@@ -93,7 +93,7 @@ public class MixinEntitySetPosEntityMoveEvent implements IPosSetChecksSwitchable
         var newLocation = new Location3d(world, new Vec3(x, y, z));
         
         var entity = (Entity)(Object) this;
-        var event = new EntityMoveEvent.Moved(entity, oldLocation, newLocation, MoveType.Self);
+        var event = new EntityMoveEvent.Moved(entity, oldLocation, newLocation, MoveType.Simple);
         MinecraftForge.EVENT_BUS.post(event);
     }
 }

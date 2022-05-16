@@ -120,7 +120,7 @@ public class MixinServerGamePacketListenerImplEntityMoveEvent implements ITelepo
         Location3d oldLocation = new Location3d(level, oldPos);
         Location3d newLocation = new Location3d(level, oldPos.add(new Vec3(d7, d8, d9)));
     
-        var event = new EntityMoveEvent.CanMove(player, oldLocation, newLocation, MoveType.Self);
+        var event = new EntityMoveEvent.CanMove(player, oldLocation, newLocation, MoveType.Simple);
         MinecraftForge.EVENT_BUS.post(event);
         var cancelled = event.isCanceled();
         
@@ -142,7 +142,7 @@ public class MixinServerGamePacketListenerImplEntityMoveEvent implements ITelepo
         Location3d oldLocation = new Location3d(level, _heavyguard_playerPositionBeforeMove);
         Location3d newLocation = new Location3d(level, player.position());
         
-        var event = new EntityMoveEvent.Moved(player, oldLocation, newLocation, MoveType.Self);
+        var event = new EntityMoveEvent.Moved(player, oldLocation, newLocation, MoveType.Simple);
         MinecraftForge.EVENT_BUS.post(event);
     }
     

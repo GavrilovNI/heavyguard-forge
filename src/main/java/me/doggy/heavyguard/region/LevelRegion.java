@@ -1,5 +1,6 @@
 package me.doggy.heavyguard.region;
 
+import me.doggy.heavyguard.api.event.region.RegionEvent;
 import me.doggy.heavyguard.api.region.IRegion;
 import me.doggy.heavyguard.api.utils.TextBuilder;
 import me.doggy.heavyguard.api.flag.FlagTypePath;
@@ -21,12 +22,13 @@ public class LevelRegion extends Pollutable implements IRegion, ICleanable
     public final RegionMembers Members;
     public final RegionFlags Flags;
     
+    public int _priority;
+    
     public LevelRegion(String name, ServerLevel world)
     {
-        this(name, world, new RegionFlags(), new RegionMembers());
+        this(name, world, new RegionFlags(), new RegionMembers(), 0);
     }
-    
-    public LevelRegion(String name, ServerLevel world, RegionFlags flags, RegionMembers members)
+    public LevelRegion(String name, ServerLevel world, RegionFlags flags, RegionMembers members, int priority)
     {
         if(name == null || name.isEmpty())
             throw new IllegalArgumentException("name is null or empty");
@@ -36,9 +38,27 @@ public class LevelRegion extends Pollutable implements IRegion, ICleanable
         _world = world;
         Members = members;
         Flags = flags;
-        
+    
         Members.setRegion(this);
         Flags.setRegion(this);
+        _priority = priority;
+    }
+    
+    @Override
+    public int getPriority()
+    {
+        return _priority;
+    }
+    
+    @Override
+    public void setPriority(int priority)
+    {
+        if(_priority == priority)
+            return;
+        var oldPriority = _priority;
+        _priority = priority;
+        markDirty();
+        RegionEvent.postEventBy(this, new RegionEvent.PriorityChanged(this, oldPriority, _priority));
     }
     
     @Override

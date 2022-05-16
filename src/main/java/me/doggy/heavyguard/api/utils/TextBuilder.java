@@ -27,6 +27,18 @@ public class TextBuilder implements Message, ISendable
     {
         return new TextBuilder().add(text);
     }
+    public static TextBuilder of(BaseComponent text, Style style)
+    {
+        return new TextBuilder().add(text, style);
+    }
+    public static TextBuilder of(BaseComponent text, ChatFormatting formatting)
+    {
+        return new TextBuilder().add(text, formatting);
+    }
+    public static TextBuilder of(BaseComponent text, TextColor textColor)
+    {
+        return new TextBuilder().add(text, textColor);
+    }
     public static TextBuilder of(String string)
     {
         return new TextBuilder().add(string);
@@ -138,9 +150,25 @@ public class TextBuilder implements Message, ISendable
         _nextTabLength = textBuilder._nextTabLength;
         return this;
     }
+    // adds text with overridden style, doesn't overrides siblings style
+    public TextBuilder add(BaseComponent text, Style style)
+    {
+        var copiedText = text.copy();
+        copiedText.setStyle(style.applyTo(copiedText.getStyle()));
+        _currentLine.append(copiedText);
+        return this;
+    }
+    public TextBuilder add(BaseComponent text, ChatFormatting formatting)
+    {
+        return add(text, Style.EMPTY.withColor(formatting));
+    }
+    public TextBuilder add(BaseComponent text, TextColor textColor)
+    {
+        return add(text, Style.EMPTY.withColor(textColor));
+    }
     public TextBuilder add(Component text)
     {
-        _currentLine.append(text.copy());
+        _currentLine.append(text);
         return this;
     }
     public TextBuilder add(String string, Style style)
@@ -155,9 +183,9 @@ public class TextBuilder implements Message, ISendable
         texts.forEach(text -> _currentLine.append(text));
         return this;
     }
-    public TextBuilder add(String string, TextColor color)
+    public TextBuilder add(String string, TextColor textColor)
     {
-        var texts = Component.nullToEmpty(string).toFlatList(Style.EMPTY.withColor(color));
+        var texts = Component.nullToEmpty(string).toFlatList(Style.EMPTY.withColor(textColor));
         texts.forEach(text -> _currentLine.append(text));
         return this;
     }
@@ -171,6 +199,18 @@ public class TextBuilder implements Message, ISendable
     {
         for(var line : _lines)
             sendFunc.accept(object, line);
+    }
+    
+    public Component build()
+    {
+        BaseComponent result = new TextComponent("");
+        for(int i = 0; i < _lines.size(); i++)
+        {
+            result.append(_lines.get(i).copy());
+            if(i < _lines.size() - 1)
+                result.append("\n");
+        }
+        return result;
     }
     
     @Override

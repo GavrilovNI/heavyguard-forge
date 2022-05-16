@@ -5,6 +5,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.eventbus.api.Cancelable;
 
+import java.util.Objects;
+
 public abstract class EntityMoveEvent extends EntityEvent
 {
     private final Location3d _oldLocation;
@@ -14,6 +16,11 @@ public abstract class EntityMoveEvent extends EntityEvent
     public EntityMoveEvent(Entity entity, Location3d oldLocation, Location3d newLocation, MoveType moveType)
     {
         super(entity);
+        Objects.requireNonNull(oldLocation);
+        Objects.requireNonNull(newLocation);
+        Objects.requireNonNull(moveType);
+        if(oldLocation.getLevel().isClientSide() != newLocation.getLevel().isClientSide())
+            throw new IllegalArgumentException("Both locations must be client or not client side.");
         _oldLocation = oldLocation;
         _newLocation = newLocation;
         _moveType = moveType;

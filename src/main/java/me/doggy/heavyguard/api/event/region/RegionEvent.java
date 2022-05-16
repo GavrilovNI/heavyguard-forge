@@ -69,4 +69,27 @@ public abstract class RegionEvent extends Event
             super(region);
         }
     }
+    
+    public static class PriorityChanged extends RegionEvent
+    {
+        private final int _oldPriority;
+        private final int _newPriority;
+        
+        public PriorityChanged(IRegion region, int oldPriority, int newPriority)
+        {
+            super(region);
+            _oldPriority = oldPriority;
+            _newPriority = newPriority;
+        }
+        
+        public int getOldPriority()
+        {
+            return _oldPriority;
+        }
+        
+        public int getNewPriority()
+        {
+            return _newPriority;
+        }
+    }
 }

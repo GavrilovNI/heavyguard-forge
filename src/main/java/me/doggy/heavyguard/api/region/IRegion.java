@@ -19,6 +19,9 @@ public interface IRegion extends IPollutable, ITextable
     
     IRegionFlags getFlags();
     
+    int getPriority();
+    void setPriority(int priority);
+    
     boolean contains(Vec3 position);
     
     boolean canInteract(FlagTypePath path);

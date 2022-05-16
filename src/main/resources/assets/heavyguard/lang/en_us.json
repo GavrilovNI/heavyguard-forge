@@ -1,0 +1,6 @@
+{
+  "itemGroup.heavyguard.heavyguard": "Heavy Guard",
+  "item.heavyguard.measuring_tape": "Measuring Tape",
+  "heavyguard.you-dont-have-region-permission": "You don't have region permission '%s' to do that!",
+  "heavyguard.you-passenger-vehicle-dont-have-region-permission": "You/passenger/vehicle (%2$s) don't have region permission '%1$s' to do that!"
+}

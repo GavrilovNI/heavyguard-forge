@@ -2,7 +2,7 @@ package me.doggy.heavyguard.api.event.entity;
 
 public enum MoveType
 {
-    Self,
+    Simple,
     Teleport,
     ChangeWorld,
     StartRiding
